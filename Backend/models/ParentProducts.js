@@ -7,9 +7,8 @@ const parentProductSchema = new mongoose.Schema({
     },
     vendor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Vendor', // Reference to the 'Vendor' model
+        ref: 'Vendor',
     },
-    // Add other fields as needed
 });
 
 module.exports = mongoose.model('ParentProduct', parentProductSchema);

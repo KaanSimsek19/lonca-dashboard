@@ -1,15 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const ParentProduct = require('../models/ParentProducts');
 const Order = require('../models/Orders');
 const Vendor = require("../models/Vendor")
 
 router.get("/vendor/:vendorId/sale", async (req, res) => {
     try {
-      // Fetch the vendor by ID
       const vendor = await Vendor.findById(req.params.vendorId);
-  
-      // Aggregate the orders
       Order.aggregate([
         { $unwind: "$cart_item" },
         {
@@ -47,7 +43,6 @@ router.get("/vendor/:vendorId/sale", async (req, res) => {
 
   router.get("/vendor/:vendorId/monthly-sales", async (req, res) => {
     try {
-        // Aggregate the orders
         const monthlySales = await Order.aggregate([
           {
             $unwind: "$cart_item",
